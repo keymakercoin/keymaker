@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Keymaker Core
+Comment=Keymaker P2P Cryptocurrency
+Comment[de]=Verbinde mit dem Keymaker peer-to-peer Netzwerk
+Comment[fr]=Keymaker, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Keymaker, eşten eşe kriptografik sanal para birimi
+Exec=keymaker-qt %u
+Terminal=false
+Type=Application
+Icon=keymaker128
+MimeType=x-scheme-handler/keymaker;
+Categories=Office;Finance;

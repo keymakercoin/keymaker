@@ -1,0 +1,52 @@
+Source: keymaker
+Section: utils
+Priority: optional
+Maintainer: Holger Schinzel <holger@keymaker.org>
+Uploaders: Holger Schinzel <holger@keymaker.org>
+Build-Depends: debhelper,
+ devscripts,
+ automake,
+ libtool,
+ bash-completion,
+ libdb4.8++-dev,
+ libssl-dev,
+ pkg-config,
+ libevent-dev,
+ libboost-system1.48-dev | libboost-system-dev (>> 1.47),
+ libboost-filesystem1.48-dev | libboost-filesystem-dev (>> 1.47),
+ libboost-thread1.48-dev | libboost-thread-dev (>> 1.47),
+ libboost-test1.48-dev | libboost-test-dev (>> 1.47),
+ libminiupnpc8-dev | libminiupnpc-dev,
+ qttools5-dev-tools, qttools5-dev,
+ libqrencode-dev,
+ python,
+ libzmq3-dev
+Standards-Version: 3.9.2
+Homepage: https://www.keymaker.org/
+Vcs-Git: git://github.com/raptor3um/keymaker.git
+Vcs-Browser: https://github.com/raptor3um/keymaker
+
+Package: keymakerd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: peer-to-peer network based digital currency - daemon
+ Keymaker is an experimental new digital currency that enables instant, private
+ payments to anyone, anywhere in the world. Keymaker uses peer-to-peer
+ technology to operate with no central authority: managing transactions
+ and issuing money are carried out collectively by the network. Keymaker Core
+ is the name of the open source software which enables the use of this currency.
+ .
+ This package provides the daemon, keymakerd, and the CLI tool
+ keymaker-cli to interact with the daemon.
+
+Package: keymaker-qt
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: peer-to-peer network based digital currency - Qt GUI
+ Keymaker is an experimental new digital currency that enables instant, private
+ payments to anyone, anywhere in the world. Keymaker uses peer-to-peer
+ technology to operate with no central authority: managing transactions
+ and issuing money are carried out collectively by the network. Keymaker Core
+ is the name of the open source software which enables the use of this currency.
+ .
+ This package provides Keymaker-Qt, a GUI for Keymaker based on Qt.

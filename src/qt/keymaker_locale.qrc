@@ -1,0 +1,25 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="ar">locale/keymaker_ar.qm</file>
+        <file alias="bg">locale/keymaker_bg.qm</file>
+        <file alias="de">locale/keymaker_de.qm</file>
+        <file alias="en">locale/keymaker_en.qm</file>
+        <file alias="es">locale/keymaker_es.qm</file>
+        <file alias="fi">locale/keymaker_fi.qm</file>
+        <file alias="fr">locale/keymaker_fr.qm</file>
+        <file alias="it">locale/keymaker_it.qm</file>
+        <file alias="ja">locale/keymaker_ja.qm</file>
+        <file alias="ko">locale/keymaker_ko.qm</file>
+        <file alias="nl">locale/keymaker_nl.qm</file>
+        <file alias="pl">locale/keymaker_pl.qm</file>
+        <file alias="pt">locale/keymaker_pt.qm</file>
+        <file alias="ro">locale/keymaker_ro.qm</file>
+        <file alias="ru">locale/keymaker_ru.qm</file>
+        <file alias="sk">locale/keymaker_sk.qm</file>
+        <file alias="th">locale/keymaker_th.qm</file>
+        <file alias="tr">locale/keymaker_tr.qm</file>
+        <file alias="vi">locale/keymaker_vi.qm</file>
+        <file alias="zh_CN">locale/keymaker_zh_CN.qm</file>
+        <file alias="zh_TW">locale/keymaker_zh_TW.qm</file>
+    </qresource>
+</RCC>

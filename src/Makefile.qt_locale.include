@@ -1,0 +1,22 @@
+QT_TS = \
+  qt/locale/keymaker_ar.ts \
+  qt/locale/keymaker_bg.ts \
+  qt/locale/keymaker_de.ts \
+  qt/locale/keymaker_en.ts \
+  qt/locale/keymaker_es.ts \
+  qt/locale/keymaker_fi.ts \
+  qt/locale/keymaker_fr.ts \
+  qt/locale/keymaker_it.ts \
+  qt/locale/keymaker_ja.ts \
+  qt/locale/keymaker_ko.ts \
+  qt/locale/keymaker_nl.ts \
+  qt/locale/keymaker_pl.ts \
+  qt/locale/keymaker_pt.ts \
+  qt/locale/keymaker_ro.ts \
+  qt/locale/keymaker_ru.ts \
+  qt/locale/keymaker_sk.ts \
+  qt/locale/keymaker_th.ts \
+  qt/locale/keymaker_tr.ts \
+  qt/locale/keymaker_vi.ts \
+  qt/locale/keymaker_zh_CN.ts \
+  qt/locale/keymaker_zh_TW.ts

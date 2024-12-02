@@ -1,0 +1,6 @@
+usr/local/bin/keymaker-qt usr/bin
+share/pixmaps/keymaker32.xpm usr/share/pixmaps
+share/pixmaps/keymaker16.xpm usr/share/pixmaps
+share/pixmaps/keymaker128.png usr/share/pixmaps
+debian/keymaker-qt.desktop usr/share/applications
+debian/keymaker-qt.protocol usr/share/kde4/services/
