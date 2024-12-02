@@ -93,11 +93,10 @@ CreateDevNetGenesisBlock(const uint256 &prevBlockHash, const std::string &devNet
  *   vMerkleTree: e0028e
  */
 static CBlock
-CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount &genesisReward) {
-    const char *pszTimestamp = "The Times 22/Jan/2018 Keymaker is name of the game for new generation of firms";
-    const CScript genesisOutputScript = CScript() << ParseHex(
-            "040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9")
-                                                  << OP_CHECKSIG;
+static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
+{
+    const char* pszTimestamp = "NY Times 06/07/2022 Fed Hurtles Toward Another Big Rate Increase as Inflation Lingers";
+    const CScript genesisOutputScript = CScript() << ParseHex("0440d24ae67d1eeab11a5a66193cb2760fea9e6d4504b9fcecf9a047074a534956ed79b28e6d3c455e7da37fa739719a3a0e8e56db6262c000fde90673180eeec6") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
 
@@ -224,68 +223,77 @@ public:
         );
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S(
-                "000000000000000000000000000000000000000000000000000eead474ccbc59"); // block 421457 chainwork
+       consensus.nMinimumChainWork = uint256S("0x0"); // 0
+
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S(
-                "ox6fb0b649723f51b67484019409fef94d077f17c8d88645e08c000b2e4fd3e28a"); // block hash for 421457
+        consensus.defaultAssumeValid = uint256S("0x0"); // 0
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0x72;//r
-        pchMessageStart[1] = 0x74;//t
-        pchMessageStart[2] = 0x6d;//m
-        pchMessageStart[3] = 0x2e;//.
-        nDefaultPort = 12421;
+        pchMessageStart[0] = 0x4B; //K
+        pchMessageStart[1] = 0x45; //E
+        pchMessageStart[2] = 0x59; //Y
+        pchMessageStart[3] = 0x40; //M
+        nDefaultPort = 2421;
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 7;
         m_assumed_chain_state_size = 2;
         //FindMainNetGenesisBlock(1614369600, 0x20001fff, "main");
-        genesis = CreateGenesisBlock(1614369600, 1130, 0x20001fff, 4, 5000 * COIN);
-        VerifyGenesisPOW(genesis);
+    genesis = CreateGenesisBlock(1667184351, 650, 0x1f00ffff, 4, 5000 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock ==
-               uint256S("0xb79e5df07278b9567ada8fc655ffbfa9d3f586dc38da3dd93053686f41caeea0"));
-        assert(genesis.hashMerkleRoot ==
-               uint256S("0x87a48bc22468acdd72ee540aab7c086a5bbcddc12b51c6ac925717a74c269453"));
+        assert(consensus.hashGenesisBlock == uint256S("0x5fcce0f1bc672960c40ae71d73e23b47efbcdba3c94008a4848bedbd4c40b44b"));        
+        assert(genesis.hashMerkleRoot == uint256S("0x8d3de61dd5deea3bdc712f40ed948bb570188f6a17a7574c5d7c87b2a5226ea9"));
 
-        vSeeds.emplace_back("lbdn.keymaker.com");
-        vSeeds.emplace_back("51.89.21.112");
+        vSeeds.emplace_back("seed00.keymaker.cc");
+        vSeeds.emplace_back("seed01.keymaker.cc");
+        vSeeds.emplace_back("seed02.keymaker.cc");
+        vSeeds.emplace_back("seed03.keymaker.cc");
+        vSeeds.emplace_back("seed04.keymaker.cc");
+        vSeeds.emplace_back("seed05.keymaker.cc");
 
-        // Keymaker addresses start with 'r'
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 60);
-        // Keymaker script addresses start with '7'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 16);
-        // Keymaker private keys start with '7' or 'X'
-        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 128);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,108);
+        // Keymaker script addresses start with 'S'
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,63);
+        // Keymaker private keys start with  'P'
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,56);
         // Keymaker BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
-        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
+        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xAD, 0xE3};
         // Keymaker BIP32 prvkeys start with 'xprv' (Bitcoin defaults)
-        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
+        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         // Keymaker BIP44 coin type is '5'
         std::string strExtCoinType = gArgs.GetArg("-extcoinindex", "");
         nExtCoinType = strExtCoinType.empty() ? 200 : std::stoi(strExtCoinType);
 //        if(gArgs.GetChainName() == CBaseChainParams::MAIN) {
 //        	std::cout << "mainnet is disable" << endl;
 //        	exit(0);
-//        }
-        std::vector <FounderRewardStructure> rewardStructures = {{INT_MAX, 5}};// 5% founder/dev fee forever
-        consensus.nFounderPayment = FounderPayment(rewardStructures, 250);
+
+ 
+        std::vector<FounderRewardStructure> rewardStructures = {  {INT_MAX, 10 } }; // 10% burn fee forever starting with block 64975
+        // kburnXXXXXXXXXXXXXXXXXXXXXXXXswNF4 burn address dirived by https://github.com/decenomy/burn_address_generator
+        consensus.nFounderPayment = FounderPayment(rewardStructures, 10);   
+       //  Smartnodes rewards start at block 5762
         consensus.nCollaterals = SmartnodeCollaterals(
-                {{88720,   600000 * COIN},
-                 {132720,  800000 * COIN},
-                 {176720,  1000000 * COIN},
-                 {220720,  1250000 * COIN},
-                 {264720,  1500000 * COIN},
-                 {INT_MAX, 1800000 * COIN}
-                },
-                {{5761,    0},
-                 {INT_MAX, 20}}
+
+          { {1000, 100 * COIN}, // STARTING HEIGHT 1
+            {5000, 1000 * COIN}, // STARTING HEIGHT 1001
+            {10000, 5000 * COIN},   // STARTING HEIGHT  5001    
+            {210240, 600000 * COIN}, // STARTING HEIGHT 10001 
+            {420480, 700000 * COIN},  // STARTING HEIGHT 210241
+            {630720, 800000 * COIN}, // STARTING HEIGHT 420481
+            {840960, 900000 * COIN}, // STARTING HEIGHT 630721
+            {1051200, 1000000 * COIN}, // STARTING HEIGHT 840961
+            {1261440, 1200000 * COIN}, // STARTING HEIGHT 1051201 
+            {INT_MAX, 1500000 * COIN} // STARTING HEIGHT 1261441  
+          },
+          { {5761, 0}, {INT_MAX, 20} }   
         );
+
+
+        
         //FutureRewardShare defaultShare(0.8,0.2,0.0);
         consensus.nFutureRewardShare = Consensus::FutureRewardShare(0.8, 0.2, 0.0);
 
@@ -313,24 +321,22 @@ public:
         nPoolMaxParticipants = 20;
         nFulfilledRequestExpireTime = 60 * 60; // fulfilled requests expire in 1 hour
 
-        vSporkAddresses = {"RWGvGpd3yJdnfh9ziyHNDEoHMJBvnZ23zK"};
+
+        vSporkAddresses = {"kkWYQMxzukCpWUXJoqtQhTXG4cTFvTJnxS"};
         nMinSporkKeys = 1;
         fBIP9CheckSmartnodesUpgraded = true;
 
         checkpointData = {
-                {{5145, uint256S("0x64c9cc82f05f4326e49fd4b21a48494b02b12a707de67a47c7e8e1102b0f1d9b")},
-                 {35000, uint256S("0xb4fb191f3ef4141557aef8aafa700d312e5499cbde4a3079faa78cf58c0c414f")},
-                 {61900, uint256S("0xc146fc6244fe4d71559f4fef16a386f1fceda6e5efa3da3ca1ebe9806cc8f25c")},
-                 {394273, uint256S("0dc274a28864a01a9539e60afdbc38fcdb0f000fbc52553cd31651c97557dc04")}
-
-                }
+          { 
+             {0, uint256S("0x5fcce0f1bc672960c40ae71d73e23b47efbcdba3c94008a4848bedbd4c40b44b")}             
+          }
         };
 
         chainTxData = ChainTxData{
-                1662608883,   // * UNIX timestamp of last known number of transactions (Block 0)
-                2091922,   // * total number of transactions between genesis and that timestamp
-                //   (the tx=... number in the SetBestChain debug.log lines)
-                0.06    // * estimated number of transactions per second after that timestamp
+          1667184351,   // * UNIX timestamp of last known number of transactions (Block 0)
+              0,   // * total number of transactions between genesis and that timestamp
+                        //   (the tx=... number in the SetBestChain debug.log lines)
+              0    // * estimated number of transactions per second after that timestamp
         };
     }
 };
@@ -423,18 +429,15 @@ public:
         VerifyGenesisPOW(genesis);
 
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock ==
-               uint256S("0xbbab22066081d3b466abd734de914e8092abf4e959bcd0fff978297c41591b23"));
-        assert(genesis.hashMerkleRoot ==
-               uint256S("0x87a48bc22468acdd72ee540aab7c086a5bbcddc12b51c6ac925717a74c269453"));
+        assert(consensus.hashGenesisBlock == uint256S("0xcc533654af0eff4b88b5a8df21a815f5f0918e50264eb422f1d81fbab80e814f"));
+        assert(genesis.hashMerkleRoot == uint256S("0x8d3de61dd5deea3bdc712f40ed948bb570188f6a17a7574c5d7c87b2a5226ea9"));
 
         vFixedSeeds.clear();
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
 
         vSeeds.clear();
-        // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("47.151.9.131");
-        vSeeds.emplace_back("lbtn.keymaker.com");
+        // nodes with support for servicebits filtering should be at the top   
+        vSeeds.emplace_back("test.keymaker.cc");
 
         // Testnet Keymaker addresses start with 'r'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 123);
@@ -496,9 +499,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-                1712153599, // * UNIX timestamp of last known number of transactions (Block 17670)
-                22643,    // * total number of transactions between genesis and that timestamp
-                0.02108492915974094        // * estimated number of transactions per second after that timestamp
+            1645942755, // * UNIX timestamp of last known number of transactions (Block 213054)
+            0,    // * total number of transactions between genesis and that timestamp
+                        //   (the tx=... number in the SetBestChain debug.log lines)
+            0.01        // * estimated number of transactions per second after that timestamp
         };
 
     }
@@ -578,10 +582,8 @@ public:
         VerifyGenesisPOW(genesis);
         consensus.hashGenesisBlock = genesis.GetHash();
 //      std::cout << "hash: " << consensus.hashGenesisBlock.ToString() << std::endl;
-        assert(consensus.hashGenesisBlock ==
-               uint256S("0x6d195b5563f3fea862d1ad151f3de7e568bb139ea3d8ee68b398580e493a504c"));
-        assert(genesis.hashMerkleRoot ==
-               uint256S("0xe87a48bc22468acdd72ee540aab7c086a5bbcddc12b51c6ac925717a74c269453"));
+        assert(consensus.hashGenesisBlock == uint256S("0x000008ca1832a4baf228eb1553c03d3a2c8e02399550dd6ea8d65cec3ef23d2e"));
+        assert(genesis.hashMerkleRoot == uint256S("0xe0028eb9648db56b1ac77cf090b99048a8007e2bb64b68f092c03c7f56a662c7"));
 
         consensus.nFutureRewardShare = Consensus::FutureRewardShare(0.8, 0.2, 0.0);
 
@@ -644,7 +646,7 @@ public:
 
         checkpointData = (CCheckpointData) {
                 {
-                        {0, uint256S("0x6d195b5563f3fea862d1ad151f3de7e568bb139ea3d8ee68b398580e493a504c")},
+                { 0, uint256S("0x000008ca1832a4baf228eb1553c03d3a2c8e02399550dd6ea8d65cec3ef23d2e")},
                 }
         };
 
@@ -745,7 +747,7 @@ public:
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb7;
         pchMessageStart[3] = 0xdc;
-        nDefaultPort = 42421;
+        nDefaultPort = 19899;
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 0;
         m_assumed_chain_state_size = 0;
@@ -753,13 +755,11 @@ public:
         // UpdateVersionBitsParametersFromArgs(args);
         UpdateBudgetParametersFromArgs(args);
 
-        genesis = CreateGenesisBlock(1614369600, 2, 0x207fffff, 4, 5000 * COIN);
-        VerifyGenesisPOW(genesis);
+        genesis = CreateGenesisBlock(1667184351, 650, 0x1f00ffff, 4, 5000 * COIN);
+
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock ==
-               uint256S("0x485491468e03c8ac23dd38f70fc1cda9f98cbd0bf58945e2da6c94c2a2d8b044"));
-        assert(genesis.hashMerkleRoot ==
-               uint256S("0x87a48bc22468acdd72ee540aab7c086a5bbcddc12b51c6ac925717a74c269453"));
+        assert(consensus.hashGenesisBlock == uint256S("0x5fcce0f1bc672960c40ae71d73e23b47efbcdba3c94008a4848bedbd4c40b44b"));        
+        assert(genesis.hashMerkleRoot == uint256S("0x8d3de61dd5deea3bdc712f40ed948bb570188f6a17a7574c5d7c87b2a5226ea9"));
         consensus.nFutureRewardShare = Consensus::FutureRewardShare(0.8, 0.2, 0.0);
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
@@ -790,7 +790,7 @@ public:
 
         checkpointData = {
                 {
-                        {0, uint256S("b79e5df07278b9567ada8fc655ffbfa9d3f586dc38da3dd93053686f41caeea0")},
+                    {0, uint256S("0xb79e5df07278b9567ada8fc655ffbfa9d3f586dc38da3dd93053686f41caeea0")},
                 }
         };
 
