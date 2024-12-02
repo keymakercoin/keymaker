@@ -1089,39 +1089,47 @@ GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params &consens
     //     std::cout << "This is Testnet only build" << endl;
     //     exit(1);
     // }
-    double nSubsidy = 5000;      // (declaring the reward variable and its original/default amount)
-    const short owlings = 21262; // amount of blocks between 2 owlings
-    int multiplier;              // integer number of owlings
-    int tempHeight;              // number of blocks since last anchor
-    if (nPrevHeight < 720) {
-        nSubsidy = Params().NetworkIDString() == CBaseChainParams::TESTNET ? 20000 : 4;
-    } else if ((nPrevHeight > 553531) && (nPrevHeight < 2105657)) {
-        tempHeight = nPrevHeight - 553532;
-        multiplier = tempHeight / owlings;
-        nSubsidy -= (multiplier * 10 + 10);
-    } else if ((nPrevHeight >= 2105657) && (nPrevHeight < 5273695)) {
-        tempHeight = nPrevHeight - 2105657;
-        multiplier = tempHeight / owlings;
-        nSubsidy -= (multiplier * 20 + 750);
-    } else if ((nPrevHeight >= 5273695) && (nPrevHeight < 7378633)) {
-        tempHeight = nPrevHeight - 5273695;
-        multiplier = tempHeight / owlings;
-        nSubsidy -= (multiplier * 10 + 3720);
-    } else if ((nPrevHeight >= 7378633) && (nPrevHeight < 8399209)) {
-        tempHeight = nPrevHeight - 7378633;
-        multiplier = tempHeight / owlings;
-        nSubsidy -= (multiplier * 5 + 4705);
-    } else if ((nPrevHeight >= 8399209) && (nPrevHeight < 14735285)) {
-        nSubsidy = 55;
-    } else if ((nPrevHeight >= 14735285) && (nPrevHeight < 15798385)) {
-        tempHeight = nPrevHeight - 14735285;
-        multiplier = tempHeight / owlings;
-        nSubsidy -= (multiplier + 4946);
-    } else if ((nPrevHeight >= 15798385) && (nPrevHeight < 25844304)) {
-        nSubsidy = 5;
-    } else if (nPrevHeight >= 25844304) {
-        nSubsidy = 0.001;
-    }
+      double nSubsidy = 1;      // (declaring the reward variable and its original/default amount)
+    int nHeight = nPrevHeight + 1;
+         
+        
+        if (nHeight == 1) { nSubsidy = 9200000;} // Premine to Exchange to cover legacy keymaker wallets
+        else if ((nHeight > 1) && (nHeight <= 1000)) {nSubsidy = 5;}        
+        else if ((nHeight > 1000) && (nHeight <= 210240 ))    {nSubsidy = 6000;}   
+        else if ((nHeight > 210240) && (nHeight <= 420480)) {nSubsidy = 5941;}    
+        else if ((nHeight > 420480) && (nHeight <= 630720)) {nSubsidy = 5882;}
+	    else if ((nHeight > 630720) && (nHeight <= 840960)) {nSubsidy = 5824;}
+		else if ((nHeight > 840960) && (nHeight <= 1051200)) {nSubsidy = 5766;}
+		else if ((nHeight > 1051200) && (nHeight <= 1261440)) {nSubsidy = 5709;}
+		else if ((nHeight > 1261440) && (nHeight <= 1471680)) {nSubsidy = 5597;}
+        else if ((nHeight > 1471680) && (nHeight <= 1681920)) {nSubsidy = 5487;}	
+	    else if ((nHeight > 1681920) && (nHeight <= 1892160)) {nSubsidy = 5380;}
+		else if ((nHeight > 1892160) && (nHeight <= 2102400)) {nSubsidy = 5274;}
+		else if ((nHeight > 2102400) && (nHeight <= 2312640)) {nSubsidy = 5171;}
+		else if ((nHeight > 2312640) && (nHeight <= 2522880)) {nSubsidy = 4924;}
+   		else if ((nHeight > 2522880) && (nHeight <= 2733120)) {nSubsidy = 4690;}
+        else if ((nHeight > 2733120) && (nHeight <= 2943360)) {nSubsidy = 4467;}
+        else if ((nHeight > 2943360) && (nHeight <= 3153600)) {nSubsidy = 4254;}
+        else if ((nHeight > 3153600) && (nHeight <= 3363840)) {nSubsidy = 4051;}
+        else if ((nHeight > 3363840) && (nHeight <= 3574080)) {nSubsidy = 3683;}
+        else if ((nHeight > 3574080) && (nHeight <= 3784320)) {nSubsidy = 3348;}
+        else if ((nHeight > 3784320) && (nHeight <= 3994560)) {nSubsidy = 3044;}
+        else if ((nHeight > 3994560) && (nHeight <= 4204800)) {nSubsidy = 2767;}
+        else if ((nHeight > 4204800) && (nHeight <= 4415040)) {nSubsidy = 2516;}
+        else if ((nHeight > 4415040) && (nHeight <= 4625280)) {nSubsidy = 1398;}
+        else if ((nHeight > 4625280) && (nHeight <= 4835520)) {nSubsidy = 776;}
+        else if ((nHeight > 4835520) && (nHeight <= 5045760)) {nSubsidy = 431;}
+        else if ((nHeight > 5045760) && (nHeight <= 5256000)) {nSubsidy = 240;}
+        else if ((nHeight > 5256000) && (nHeight <= 5466240)) {nSubsidy = 133;}
+        else if ((nHeight > 5466240) && (nHeight <= 5676480)) {nSubsidy = 70;}
+        else if ((nHeight > 5676480) && (nHeight <= 5886720)) {nSubsidy = 37;}
+        else if ((nHeight > 5886720) && (nHeight <= 6096960)) {nSubsidy = 19;}
+        else if ((nHeight > 6096960) && (nHeight <= 6307200)) {nSubsidy = 10;}
+        else if ((nHeight > 6307200) && (nHeight <= 6517440)) {nSubsidy = 5;} 
+        else if ((nHeight > 6517440) && (nHeight <= 6727680)) {nSubsidy = 3;} 
+        else if (nHeight > 6727680) {nSubsidy =  1;}  // 32 Years
+
+     
     return nSubsidy * COIN;
 }
 
